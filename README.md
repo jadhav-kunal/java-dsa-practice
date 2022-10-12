@@ -1,4 +1,4 @@
-# DSA
+## DSA
 
 1. When the interviewer says the question, write down the key points at the top (i.e. sorted array). Make sure you have all the details. Show how organized you are.
 2. Make sure you double check: What are the inputs? What are the outputs?
