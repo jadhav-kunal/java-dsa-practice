@@ -21,7 +21,7 @@ function firstRecurringCharacter(arr){
         } 
     }
     return undefined;
-}
+}// O(n^2)
 
 function firstRecurringCharacter2(arr){
     let map = {};
@@ -32,6 +32,6 @@ function firstRecurringCharacter2(arr){
             map[arr[i]] = i;
         }
     }
-}
+}// O(n)
 const result = firstRecurringCharacter2([2,1,1,2,3,5,1,2,4]);
 console.log(result);
