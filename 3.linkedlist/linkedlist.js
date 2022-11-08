@@ -13,6 +13,13 @@
 //   },
 // };
 
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
 class LinkedList {
   constructor(value) {
     this.head = {
@@ -22,7 +29,33 @@ class LinkedList {
     this.tail = this.head;
     this.length = 1;
   }
+
+  append(value) {
+    const newNode = new Node(value);
+    this.tail.next = newNode; // now this.tail is the prev tail , where we are adding pointer to new node
+    this.tail = newNode; // here tail is changed to newNode
+    this.length++;
+    return this;
+  }
+
+  prepend(value) {
+    const newNode = new Node(value);
+    newNode.next = this.head;
+    this.head = newNode;
+    this.length++;
+    return this;
+  }
 }
 
 const myLinkedList = new LinkedList(10);
+myLinkedList.append(5);
+myLinkedList.append(16);
+myLinkedList.prepend(1);
 console.log(myLinkedList);
+
+// Output:
+// LinkedList {
+//     head: { value: 10, next: { value: 5, next: [Object] } },
+//     tail: { value: 16, next: null },
+//     length: 3
+//   }
