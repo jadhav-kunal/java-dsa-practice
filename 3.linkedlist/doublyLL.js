@@ -1,30 +1,19 @@
-// 10 --> 5 --> 16
-
-// let myLinkedList = {
-//   head: {
-//     value: 10,
-//     next: {
-//       value: 5,
-//       next: {
-//         value: 16,
-//         next: null,
-//       },
-//     },
-//   },
-// };
+//doubly linked list
 
 class Node {
   constructor(value) {
     this.value = value;
     this.next = null;
+    this.prev = null;
   }
 }
 
-class LinkedList {
+class DoublyLinkedList {
   constructor(value) {
     this.head = {
       value: value,
       next: null,
+      prev: null,
     };
     this.tail = this.head;
     this.length = 1;
@@ -32,6 +21,7 @@ class LinkedList {
 
   append(value) {
     const newNode = new Node(value);
+    newNode.prev = this.tail;
     this.tail.next = newNode; // now this.tail is the prev tail , where we are adding pointer to new node
     this.tail = newNode; // here tail is changed to newNode
     this.length++;
@@ -41,6 +31,7 @@ class LinkedList {
   prepend(value) {
     const newNode = new Node(value);
     newNode.next = this.head;
+    this.head.prev = newNode;
     this.head = newNode;
     this.length++;
     return this;
@@ -64,7 +55,9 @@ class LinkedList {
     const leader = this.traverseToIndex(index - 1);
     const follower = leader.next;
     leader.next = newNode;
+    newNode.prev = leader;
     newNode.next = follower;
+    follower.prev = newNode;
     this.length++;
     return this;
   }
@@ -83,20 +76,13 @@ class LinkedList {
     const leader = this.traverseToIndex(index - 1);
     const unwantedNode = leader.next;
     leader.next = unwantedNode.next;
+    leader.next.prev = leader;
     this.length--;
     return this;
   }
 }
 
-// console.log(myLinkedList);
-// Output:
-// LinkedList {
-//     head: { value: 10, next: { value: 5, next: [Object] } },
-//     tail: { value: 16, next: null },
-//     length: 3
-//   }
-
-const myLinkedList = new LinkedList(10);
+const myLinkedList = new DoublyLinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.prepend(1);
